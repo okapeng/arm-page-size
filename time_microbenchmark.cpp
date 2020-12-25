@@ -11,8 +11,6 @@
 using namespace std::chrono;
 
 const long unsigned int touchCount = 100000000;
-const unsigned int a = 1103515245; // multiplier for random number generator
-const unsigned int c = 12345; // increment for random number generator
 
 const std::string SEQUENTIAL("sequential");
 const std::string RANDOM("random");
@@ -20,6 +18,7 @@ const std::string RANDOM("random");
 int main(int argc, char **argv)
 {
     std::vector<int> data;
+    std::vector<int> index;
     if (argc == 4)
     {
         const int PAGE_SIZE = atoi(argv[1]); // obtained by getconf PAGESIZE
@@ -36,6 +35,7 @@ int main(int argc, char **argv)
         int sum = 0;
 
         data.resize(size, 0);
+        index.resize(touchCount, 0);
 
         while (size > counter)
         {
@@ -43,27 +43,22 @@ int main(int argc, char **argv)
             counter++;
         }
 
+	// Initialise access stream
+	if (SEQUENTIAL == argv[2]) {
+		for (int j = 0; j < touchCount; j++) {
+			index[j] = (j * 4) % size;
+		}
+	} else if (RANDOM == argv[2]) {
+		srand(42);
+		for (int j = 0; j < touchCount; j++) {
+			index[j] = rand() % size;
+		}
+	}
+
 	auto start = high_resolution_clock::now();
 
-        if (SEQUENTIAL == argv[2])
-        {
-            //std::cout << "Start sequential processing..." << std::endl;
-            for (int j = 0; j < touchCount; j++)
-            {
-                sum += data[j % size];
-            }
-        }
-        else if (RANDOM == argv[2])
-        {
-            //std::cout << "Start random processing..." << std::endl;
-            for (int j = 0; j < touchCount; j++)
-            {
-		seed = (seed * a + c) % size;
-		sum += data[seed];
-		// rand = (rand * (2*j+1)) % size;
-		// sum += data[rand];
-                // sum += data[rand() % size];
-            }
+        for (int j = 0; j < touchCount; j++) {
+            sum += data[index[j]];
         }
 
 
