@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <string>
 #include <unistd.h>
 #include <iostream>
 #include <vector>
@@ -7,12 +6,10 @@
 #include <time.h>
 #include <stdio.h>
 
-const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
-const std::string perf_stat_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
-const std::string parent_pid = "--pid=" + std::to_string(getpid());
-const char *args[] = {"--event=instructions,mem_access,dTLB-load-misses,l1d_tlb_refill,iTLB-load-misses,page_walk_l1_stage1_hit,page_walk_l2_stage1_hit", parent_pid.c_str(), NULL};
-
 const long unsigned int touchCount = 100000000;
+const int a = 1664525; // multiplier for random number generator 
+const int c = 1013904223; // increment for random number generator
+const int m = 2^32; // modulus for random number generator
 
 const std::string SEQUENTIAL("sequential");
 const std::string RANDOM("random");
@@ -56,23 +53,9 @@ int main(int argc, char **argv)
 			}
 		}
 
-		pid_t pid = fork(); // create child process
-		int status;
-		switch (pid) {
-			case -1:
-				perror("fork");
-				exit(1);
-			case 0 :
-			        execl(perf_cmd.c_str(),perf_stat_cmd.c_str(),"stat", 
-						"-e instructions,mem_access,dTLB-load-misses,l1d_tlb_refill,iTLB-load-misses,page_walk_l1_stage1_hit,page_walk_l2_stage1_hit", 
-						parent_pid.c_str() ,NULL);
-			        perror("execl");
-			        exit(1);
-			default:
-				perror("microbenchmark");
-		}	
 
-		sleep(1);
+		std::cout << "Waiting ..." << std::endl ;
+		sleep(5);
 		//std::cout << "touch " << touchCount << " times NUM_INTS_IN_PAGE: "<< NUM_INTS_IN_PAGE 
 		//	<< " NUM_PAGES_IN_GB: " << NUM_PAGES_IN_GB << std::endl;
 
