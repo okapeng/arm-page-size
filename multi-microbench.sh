@@ -14,6 +14,16 @@ if [ -z "$3" ]
 	echo "No argument supplied"
 	exit 
 fi
+if [ -z "$4" ]
+	then
+	echo "No argument supplied"
+	exit 
+fi
+if [ -z "$5" ]
+	then
+	echo "No argument supplied"
+	exit 
+fi
 
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -38,12 +48,13 @@ function ctrl_c() {
 	echo "Trapped CTRL-C"
 }
 
-BENCHMARK=$1 # specify the menchmark to run
-MEMORY=$4 # specify memory size for each process in GB
-PAGE_SIZE=$2 # specify page size 4096 or 65536
-ACCESS_PATTERN=$3 # specify the access pattern, random or sequential
+BENCHMARK_measure=$1 # specify the menchmark to run
+BENCHMARK=$2 # specify the menchmark to run on background
+MEMORY=$5 # specify memory size for each process in GB
+PAGE_SIZE=$3 # specify page size 4096 or 65536
+ACCESS_PATTERN=$4 # specify the access pattern, random or sequential
 
-$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_0=$!
+$BENCHMARK_measure $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_0=$!
 $BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_1=$!
 $BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_2=$!
 $BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_3=$!

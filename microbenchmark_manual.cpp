@@ -54,12 +54,13 @@ int main(int argc, char **argv)
 		}
 
 
-		std::cout << "Waiting ..." << std::endl ;
-		sleep(5);
-		//std::cout << "touch " << touchCount << " times NUM_INTS_IN_PAGE: "<< NUM_INTS_IN_PAGE 
-		//	<< " NUM_PAGES_IN_GB: " << NUM_PAGES_IN_GB << std::endl;
+		//std::cout << "Waiting ..." << std::endl ;
+		//sleep(5);
+		for (int j = 0; j < touchCount; j++) {
+			sum += data[index[j] % size];
+		}
 
-		if (SEQUENTIAL == argv[2]) {
+		/*if (SEQUENTIAL == argv[2]) {
 			// std::cout << "Start sequential processing..." << std::endl;
 			for (int j = 0; j < touchCount; j++) {
 				sum += data[index[j] % size];
@@ -67,11 +68,9 @@ int main(int argc, char **argv)
 		} else if (RANDOM == argv[2]) {
 			// std::cout << "Start random processing..." << std::endl;
 			for (unsigned int j = 0; j < touchCount; j++) {
-				//seed = (seed * a + c) % size;
-				//sum += data[seed];
 				sum += data[index[j] % size];
 			}
-		}
+		}*/
 
 		std::cout << "Result: " << sum << std::endl;
 	} else {

@@ -7,7 +7,8 @@
 #include <time.h>
 #include <stdio.h>
 
-const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
+const std::string perf_cmd = "/proj/arm-page-walks-PG0/exp/page-size/datastore/linux-5.4.86/tools/perf/perf";
+//const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
 const std::string parent_pid = "--pid=" + std::to_string(getpid());
 
 const long unsigned int touchCount = 100000000;
