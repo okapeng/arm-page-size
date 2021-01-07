@@ -57,7 +57,7 @@ ACCESS_PATTERN=$4 # specify the access pattern, random or sequential
 $BENCHMARK_measure $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_0=$!
 $BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_1=$!
 $BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_2=$!
-$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_3=$!
+//$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_3=$!
 
 echo "pid is $(pid_0)"
 wait $pid_0
