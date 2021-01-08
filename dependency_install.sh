@@ -16,3 +16,4 @@ apt install libdw-dev
 apt install binutils-dev
 apt install libunwind-dev
 apt install libaudit-dev
+apt install libiberty-dev
