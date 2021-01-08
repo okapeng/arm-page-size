@@ -7,9 +7,7 @@
 #include <stdio.h>
 
 const long unsigned int touchCount = 100000000;
-const int a = 1664525; // multiplier for random number generator 
-const int c = 1013904223; // increment for random number generator
-const int m = 2^32; // modulus for random number generator
+const long unsigned int NUM_INTS_PER_GB = 268435456;
 
 const std::string SEQUENTIAL("sequential");
 const std::string RANDOM("random");
@@ -18,16 +16,11 @@ int main(int argc, char **argv)
 {
 	std::vector<int> data;
 	std::vector<int> index;
-	if (argc == 4)
+	if (argc == 3)
 	{
-		const int PAGE_SIZE = atoi(argv[1]); // obtained by getconf PAGESIZE
-		const int NUM_PAGES_IN_GB = 1024 * 1024 * 1024 / PAGE_SIZE;
-		const int NUM_INTS_IN_PAGE = PAGE_SIZE / sizeof(int);
-
-		int numGB = atoi(argv[3]);			// read dataset size in GB
-		unsigned int size = numGB * NUM_PAGES_IN_GB * NUM_INTS_IN_PAGE; // number of element in the array
-		std::cout << "Allocating " << numGB << "GB" << std::endl;
-
+		int numGB = atoi(argv[2]);			// read dataset size in GB
+		long unsigned int size = numGB * NUM_INTS_PER_GB; // number of element in the array
+		std::cout << "Process " << getpid() << " allocates " << numGB << " GB, array size " << size << std::endl;
 		unsigned int counter = 0;
 		int seed = 43;
 		int sum = 0;

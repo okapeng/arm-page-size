@@ -19,11 +19,6 @@ if [ -z "$4" ]
 	echo "No argument supplied"
 	exit 
 fi
-if [ -z "$5" ]
-	then
-	echo "No argument supplied"
-	exit 
-fi
 
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -45,21 +40,26 @@ function ctrl_c() {
 		echo -n "Killing process 3..."
 		kill $pid_3
 	fi
+	if [! -z "$pid_4" ]; then
+		echo -n "Killing process 3..."
+		kill $pid_4
+	fi
+	
 	echo "Trapped CTRL-C"
 }
 
 BENCHMARK_measure=$1 # specify the menchmark to run
 BENCHMARK=$2 # specify the menchmark to run on background
-MEMORY=$5 # specify memory size for each process in GB
-PAGE_SIZE=$3 # specify page size 4096 or 65536
-ACCESS_PATTERN=$4 # specify the access pattern, random or sequential
+MEMORY=$4 # specify memory size for each process in GB
+ACCESS_PATTERN=$3 # specify the access pattern, random or sequential
 
-$BENCHMARK_measure $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_0=$!
-$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_1=$!
-$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_2=$!
-//$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_3=$!
+$BENCHMARK_measure $ACCESS_PATTERN $MEMORY & pid_0=$!
+$BENCHMARK $ACCESS_PATTERN $MEMORY & pid_1=$!
+$BENCHMARK $ACCESS_PATTERN $MEMORY & pid_2=$!
+$BENCHMARK $ACCESS_PATTERN $MEMORY & pid_3=$!
+$BENCHMARK $ACCESS_PATTERN $MEMORY & pid_4=$!
+#$BENCHMARK $PAGE_SIZE $ACCESS_PATTERN $MEMORY & pid_3=$!
 
-echo "pid is $(pid_0)"
 wait $pid_0
 echo "process 0 terminate" 
 
