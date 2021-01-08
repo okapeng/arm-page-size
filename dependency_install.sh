@@ -1,4 +1,5 @@
 #!/bin/bash -x 
+apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev
 apt install libncursesw5-dev
 apt install libelf-dev
 apt install systemtap-sdt-dev
