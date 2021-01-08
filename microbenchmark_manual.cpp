@@ -48,7 +48,6 @@ int main(int argc, char **argv)
 
 
 		std::cout << "Waiting ..." << std::endl;
-		std::cout << index[456] << " " << index[873] << std::endl;
 		sleep(5);
 		std::cout << "start access " << touchCount << std::endl;
 		for (int j = 0; j < touchCount; j++) {
