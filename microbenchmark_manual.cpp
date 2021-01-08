@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 		int numGB = atoi(argv[2]);			// read dataset size in GB
 		long unsigned int size = numGB * NUM_INTS_PER_GB; // number of element in the array
 		std::cout << "Process " << getpid() << " allocates " << numGB << " GB, array size " << size << std::endl;
-		unsigned int counter = 0;
+		unsigned long int counter = 0;
 		int seed = 43;
 		int sum = 0;
 
@@ -35,11 +35,11 @@ int main(int argc, char **argv)
 		}
 
 		// Initialise access stream 
-		if (SEQUENTIAL == argv[2]) {
+		if (SEQUENTIAL == argv[1]) {
 			for (int j = 0; j < touchCount; j++) {
 				index[j] = (j * 4) % size;
 			}
-		} else if (RANDOM == argv[2]) {
+		} else if (RANDOM == argv[1]) {
 			srand(42);
 			for (int j = 0; j < touchCount; j++) {
 				index[j] = rand();
@@ -47,8 +47,10 @@ int main(int argc, char **argv)
 		}
 
 
-		//std::cout << "Waiting ..." << std::endl ;
-		//sleep(5);
+		std::cout << "Waiting ..." << std::endl;
+		std::cout << index[456] << " " << index[873] << std::endl;
+		sleep(5);
+		std::cout << "start access " << touchCount << std::endl;
 		for (int j = 0; j < touchCount; j++) {
 			sum += data[index[j] % size];
 		}
