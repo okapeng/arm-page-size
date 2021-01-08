@@ -11,6 +11,7 @@
 using namespace std::chrono;
 
 const long unsigned int touchCount = 100000000;
+const long unsigned int NUM_INTS_PER_GB = 268435456;
 
 const std::string SEQUENTIAL("sequential");
 const std::string RANDOM("random");
@@ -19,19 +20,13 @@ int main(int argc, char **argv)
 {
     std::vector<int> data;
     std::vector<int> index;
-    if (argc == 4)
+    if (argc == 3)
     {
-        const int PAGE_SIZE = atoi(argv[1]); // obtained by getconf PAGESIZE
-        const int NUM_PAGES_IN_GB = 1024 * 1024 * 1024 / PAGE_SIZE;
-        const int NUM_INTS_IN_PAGE = PAGE_SIZE / sizeof(int);
-
-        int numGB = atoi(argv[3]);          // read dataset size in GB
-        unsigned int size = numGB * NUM_PAGES_IN_GB * NUM_INTS_IN_PAGE; // size is the number of elements in the test dataset
-
+	int numGB = atoi(argv[2]);			// read dataset size in GB
+	long unsigned int size = numGB * NUM_INTS_PER_GB; // number of element in the array
         std::cout << "Allocating " << numGB << "GB" << std::endl;
 
-        unsigned int counter = 0;
-	unsigned int seed = 43;
+        long unsigned int counter = 0;
         int sum = 0;
 
         data.resize(size, 0);
@@ -42,19 +37,21 @@ int main(int argc, char **argv)
             data[counter] = 1;
             counter++;
         }
+	std::cout << "Set up " << argv[1] << " access stream" << std::endl;
 
 	// Initialise access stream
-	if (SEQUENTIAL == argv[2]) {
+	if (SEQUENTIAL == argv[1]) {
 		for (int j = 0; j < touchCount; j++) {
 			index[j] = (j * 4) % size;
 		}
-	} else if (RANDOM == argv[2]) {
+	} else if (RANDOM == argv[1]) {
 		srand(42);
 		for (int j = 0; j < touchCount; j++) {
 			index[j] = rand() % size;
 		}
 	}
 
+	std::cout << "Start " << argv[1] << " access" << std::endl;
 	auto start = high_resolution_clock::now();
 
         for (int j = 0; j < touchCount; j++) {
