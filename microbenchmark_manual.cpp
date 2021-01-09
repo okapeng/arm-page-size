@@ -47,9 +47,9 @@ int main(int argc, char **argv)
 		}
 
 
-		std::cout << "Waiting ..." << std::endl;
-		sleep(5);
-		std::cout << "start access " << touchCount << std::endl;
+		//std::cout << "Waiting ..." << std::endl;
+		//sleep(5);
+		//std::cout << "start access " << touchCount << std::endl;
 		for (int j = 0; j < touchCount; j++) {
 			sum += data[index[j] % size];
 		}
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 			}
 		}*/
 
-		std::cout << "Result: " << sum << std::endl;
+		//std::cout << "Result: " << sum << std::endl;
 	} else {
 		std::cout << "Usage: ./microbenchmark <page_size> <access_pattern> <dataset_size> " << std::endl;
 		std::cout << "<page_size> - 4096 or 65536" << std::endl;

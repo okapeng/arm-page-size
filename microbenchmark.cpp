@@ -7,7 +7,7 @@
 #include <time.h>
 #include <stdio.h>
 
-const std::string perf_cmd = "/proj/arm-page-walks-PG0/exp/page-size/datastore/linux-5.4.86/tools/perf/perf";
+const std::string perf_cmd = "/users/ivy_wang/tools/perf/perf";
 //const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
 const std::string parent_pid = "--pid=" + std::to_string(getpid());
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 				exit(1);
 			case 0 :
 			        execl(perf_cmd.c_str(),perf_cmd.c_str(),"stat", 
-						"-e instructions,mem_access,dTLB-load-misses,l1d_tlb_refill,iTLB-load-misses,page_walk_l1_stage1_hit,page_walk_l2_stage1_hit", 
+						"-e instructions,mem_access,mem_access_rd,dTLB-load-misses,l1d_tlb_refill,iTLB-load-misses,inst_spec,inst_retired,ld_spec,dtb_miss", 
 						parent_pid.c_str() ,NULL);
 			        exit(1);
 			default:
@@ -66,10 +66,11 @@ int main(int argc, char **argv)
 		}	
 
 
-		for (int j = 0; j < touchCount; j++) {
+		for (unsigned int j = 0; j < touchCount; j++) {
 			sum += data[index[j]];
 		}
 
+		std::cout << "Result: " << sum << std::endl;
 	} else {
 		std::cout << "Usage: ./microbenchmark <access_pattern> <dataset_size> " << std::endl;
 		std::cout << "<page_size> - 4096 or 65536" << std::endl;
