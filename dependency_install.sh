@@ -1,19 +1,19 @@
 #!/bin/bash -x 
 apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev
-apt install libncursesw5-dev
-apt install libelf-dev
-apt install systemtap-sdt-dev
-apt install libslang2-dev
-apt install libgtk2.0-dev
-apt install libperl-dev
-apt install python-dev
-apt install liblzma-dev
-apt install libzstd-dev
-apt install libcap-dev
-apt install libnuma-dev
-apt install libbabeltrace-ctf-dev
-apt install libdw-dev
-apt install binutils-dev
-apt install libunwind-dev
-apt install libaudit-dev
-apt install libiberty-dev
+apt-get install libncurses5-dev libncursesw5-dev
+apt-get install libelf-dev
+apt-get install systemtap-sdt-dev
+apt-get install libslang2-dev
+apt-get install libgtk2.0-dev
+apt-get install libperl-dev
+apt-get install python-dev
+apt-get install liblzma-dev
+apt-get install libzstd-dev
+apt-get install libcap-dev
+apt-get install libnuma-dev
+apt-get install libbabeltrace-ctf-dev
+apt-get install libdw-dev
+apt-get install binutils-dev
+apt-get install libunwind-dev
+apt-get install libaudit-dev
+apt-get install libiberty-dev
