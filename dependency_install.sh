@@ -1,5 +1,5 @@
 #!/bin/bash -x 
-apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev
+apt-get install build-essential linux-source bc kmod cpio flex libncurses5-dev libelf-dev libssl-dev
 apt-get install libncurses5-dev libncursesw5-dev
 apt-get install libelf-dev
 apt-get install systemtap-sdt-dev
