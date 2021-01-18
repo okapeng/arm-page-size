@@ -6,7 +6,7 @@
 #include <time.h>
 #include <stdio.h>
 
-const long unsigned int touchCount = 100000000;
+const long unsigned int touchCount = 500000000;
 const long unsigned int NUM_INTS_PER_GB = 268435456;
 
 const std::string SEQUENTIAL("sequential");

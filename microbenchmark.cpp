@@ -11,7 +11,7 @@ const std::string perf_cmd = "/users/ivy_wang/tools/perf/perf";
 //const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
 const std::string parent_pid = "--pid=" + std::to_string(getpid());
 
-const long unsigned int touchCount = 100000000;
+const long unsigned int touchCount = 500000000;
 const long unsigned int NUM_INTS_PER_GB = 268435456;
 
 const std::string SEQUENTIAL("sequential");
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 		// Initialise access stream 
 		if (SEQUENTIAL == argv[1]) {
 			for (unsigned int j = 0; j < touchCount; j++) {
-				index[j] = (j * 4) % size;
+				index[j] = (j * 3) % size;
 			}
 		} else if (RANDOM == argv[1]) {
 			srand(42);
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 				exit(1);
 			case 0 :
 			        execl(perf_cmd.c_str(),perf_cmd.c_str(),"stat", 
-						"-e instructions,mem_access,mem_access_rd,dTLB-load-misses,l1d_tlb_refill,iTLB-load-misses,inst_spec,inst_retired,ld_spec,dtb_miss", 
+						"-e instructions,mem_access,dTLB-load-misses,inst_retired,dtb_miss", 
 						parent_pid.c_str() ,NULL);
 			        exit(1);
 			default:
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 			sum += data[index[j]];
 		}
 
-		std::cout << "Result: " << sum << std::endl;
+		//std::cout << "Result: " << sum << std::endl;
 	} else {
 		std::cout << "Usage: ./microbenchmark <access_pattern> <dataset_size> " << std::endl;
 		std::cout << "<page_size> - 4096 or 65536" << std::endl;

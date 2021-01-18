@@ -10,7 +10,7 @@
 
 using namespace std::chrono;
 
-const long unsigned int touchCount = 100000000;
+const long unsigned int touchCount = 500000000;
 const long unsigned int NUM_INTS_PER_GB = 268435456;
 
 const std::string SEQUENTIAL("sequential");
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	// Initialise access stream
 	if (SEQUENTIAL == argv[1]) {
 		for (int j = 0; j < touchCount; j++) {
-			index[j] = (j * 4) % size;
+			index[j] = (j * 3) % size;
 		}
 	} else if (RANDOM == argv[1]) {
 		srand(42);
