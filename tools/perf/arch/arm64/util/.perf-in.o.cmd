@@ -1,0 +1,1 @@
+cmd_arch/arm64/util/perf-in.o :=  ld   -r -o arch/arm64/util/perf-in.o  arch/arm64/util/header.o arch/arm64/util/sym-handling.o arch/arm64/util/dwarf-regs.o arch/arm64/util/unwind-libunwind.o arch/arm64/util/../../arm/util/pmu.o arch/arm64/util/../../arm/util/auxtrace.o arch/arm64/util/../../arm/util/cs-etm.o arch/arm64/util/arm-spe.o
