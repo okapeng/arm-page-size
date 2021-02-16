@@ -9,9 +9,8 @@ fi
 BENCHMARK=$1 # specify the benchmark to run
 ACCESS_PATTERN=$2 # specify the access pattern, random or sequential
 MEMORY=$3 # specify memory size for each process in GB
-NUM_RUNS=20 # number of runs
 
-for i in {1..$NUM_RUNS}
+for i in {1..20}
 do
 	$BENCHMARK $ACCESS_PATTERN $MEMORY & pid=$!
 	wait $pid
