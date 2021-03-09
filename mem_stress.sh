@@ -8,14 +8,16 @@ fi
 
 MEMORY=$1
 
-./triple_run.sh ./microbenchmark_counter random $MEMORY
+#./triple_run.sh ./microbenchmark_counter random $MEMORY
+./microbenchmark_counter random $MEMORY
+./microbenchmark_counter random $MEMORY
 sleep 2
 ./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
 sleep 2
 ./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
-sleep 2
-./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
-sleep 2
-./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
-sleep 2
-./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
+#sleep 2
+#./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
+#sleep 2
+#./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
+#sleep 2
+#./multi-microbench.sh ./microbenchmark_counter ./microbenchmark_manual random $MEMORY
