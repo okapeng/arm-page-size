@@ -7,7 +7,7 @@
 #include <time.h>
 #include <stdio.h>
 
-const std::string perf_cmd = "/users/ivy_wang/tools/perf/perf";
+const std::string perf_cmd = "/home/ubuntu/linux-5.12.2/tools/perf/perf";
 //const std::string perf_cmd = "/mydata/linux-5.4.81/tools/perf/perf";
 const std::string parent_pid = "--pid=" + std::to_string(getpid());
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 				exit(1);
 			case 0 :
 			        execl(perf_cmd.c_str(),perf_cmd.c_str(),"stat", 
-						"-e instructions,mem_access,dTLB-load-misses,inst_retired,dtb_miss", 
+						"-e dTLB-loads,dTLB-load-misses,dtlb_walk,l1d_tlb,l1d_tlb_rd,l1d_tlb_refill,l2d_tlb,l2d_tlb_refill", 
 						parent_pid.c_str() ,NULL);
 			        exit(1);
 			default:

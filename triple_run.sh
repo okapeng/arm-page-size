@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]
 	then
-	echo "No argument supplied"
+	echo "Please specify the microbenchmark to run"
 	exit 
 fi
 
