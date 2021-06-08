@@ -1,2 +1,2 @@
-./sequential.sh 7 >> 64kb_64kb_seq.out
-./random.sh 7 >> 64kb_64kb_rand.out
+./sequential.sh 10 >> /mnt/4kb_4kb_seq.out
+./random.sh 10 >> /mnt/4kb_4kb_rand.out
