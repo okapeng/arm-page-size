@@ -10,9 +10,12 @@ PAGESIZE=$1
 MEMORY=10
 OUTPUT=/mnt/output/$PAGESIZE
 
+./disable_THP.sh 
 mkdir -p $OUTPUT
 echo "Start characterizing sequential microbenchmark"
 ./triple_run.sh ./time_microbenchmark sequential $MEMORY >> $OUTPUT/seq_$PAGESIZE.txt
 sleep 2
 echo "Start characterizing random microbenchmark"
 ./triple_run.sh ./time_microbenchmark random $MEMORY >> $OUTPUT/rand_$PAGESIZE.txt
+
+
