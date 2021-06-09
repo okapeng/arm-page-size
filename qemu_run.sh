@@ -6,7 +6,7 @@ if [ -z "$1" ]
         exit
 fi
 
-if [ -z "$2" ]
+if [ -z $2 ]
         then
         echo "THP is enabled"
         ./enable_THP.sh
